@@ -60,7 +60,7 @@ public class JusoApi {
 
 
 
-            System.out.println(h_code + jibun);
+            System.out.println("n차 통합코드: " + h_code + jibun);
 
         } catch (Exception e) {
             e.printStackTrace();
