@@ -1,6 +1,7 @@
 package com.example.jusoapitest;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,7 +11,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 
-
+@Slf4j
 public class JusoApi {
 
     public static void main(String[] args) {
@@ -59,8 +60,7 @@ public class JusoApi {
             String jibun = String.format("%06d",intAdd2);                       // 최종 결과
 
 
-
-            System.out.println("n차 통합코드: " + h_code + jibun);
+            log.info("n차 통합코드: " + h_code + jibun);
 
         } catch (Exception e) {
             e.printStackTrace();
