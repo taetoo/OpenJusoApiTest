@@ -20,9 +20,12 @@ public class JusoApi {
         String result = "";
 
         try {
-            // 인증키 (개인이 받아와야함)
 
-            String keyword = URLEncoder.encode("구로동 97-6", "UTF-8");
+            String fullJuso = "서울특별시 구로구 구로동 97-6 다인빌딩 406호";
+
+
+            // 주소 검색, URLEncoder는 URL을 인코딩 하기위해 사용하는 클래스
+            String keyword = URLEncoder.encode(fullJuso, "UTF-8");
 
 
             URL url = new URL("https://business.juso.go.kr/addrlink/addrLinkApi.do?currentPage=1&countPerPage=10&keyword="
@@ -44,7 +47,8 @@ public class JusoApi {
 
             // 리스트 추출
             JSONArray jusoArray = (JSONArray)addResult.get("juso");
-            // 컬렉션 추출
+
+            // 컬렉션 추출 주소정보 뽑을 준비 완료!
             JSONObject jusoColl = (JSONObject) jusoArray.get(0);
 
             // 행정동 코드
@@ -57,14 +61,18 @@ public class JusoApi {
             String intAdd1 = addName.replaceAll("[^0-9]", ""); // 지번만 추출
             int intAdd2 = Integer.parseInt(intAdd1);                            // int 로 형변환
 
-            String jibun = String.format("%06d",intAdd2);                       // 최종 결과
+            String jibunNm = String.format("%06d",intAdd2);                       // 최종 지번 숫자만
 
 
-            log.info("n차 통합코드: " + h_code + jibun);
+            log.info("n차 통합코드: " + h_code + jibunNm);
+
+
+
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("잘못된 접근입니다",e);
         }
+        log.info("프로그램이 정상적으로 종료되었습니다.");
     }
 }
 
